@@ -6,28 +6,64 @@ function server5() {
   const {query} = require('./mySql')
   const cors = require('koa2-cors')
   const app = new Koa()
-  async function getUser() {
-    let sql = 'select * from user'
+  async function login(username, password) {
+    let sql = "select * from user where username = '" + username + "' and password = '" + password + "'"
     let data = await query(sql)
     return data
   }
-  async function postUser(username) {
+  async function getUser(username) {
     let sql = "select * from user where username = '" + username + "'"
     let data = await query(sql)
     console.log(data)
     return data
   }
+  async function register(username, password) {
+    let sql = "insert into user(userid, username, password) values (uuid(), '" + username + "', '" + password + "')"
+    let data = await query(sql)
+    return data
+  }
   let home = new Router()
   // 子路由
-  home.get('/user', async ( ctx )=>{
-    let data = await getUser()
-    ctx.body = data[0]
+  home.post('/login', async ( ctx )=>{
+    let response = {}
+    let username = ctx.request.body.username
+    let password = ctx.request.body.password
+    let data = await login(username, password)
+    if (data.length != 0) {
+      response.stat = 1
+      response.data = data[0]
+    } else {
+      response.stat = 0
+      response.msg = '用户名或密码错误'
+    }
+    ctx.body = response
   })
   home.post('/getUser', async (ctx) => {
-    console.log(ctx.request.body)
+    let response = {}
     let username = ctx.request.body.username
-    let data = await postUser(username)
-    ctx.body = data[0]
+    let data = await getUser(username)
+    if (data.length != 0) {
+      response.stat = 1
+      response.data = data[0]
+    } else {
+      response.stat = 0
+    }
+    ctx.body = response
+  })
+
+  home.post('/register', async (ctx) => {
+    let response = {}
+    let username = ctx.request.body.username
+    let password = ctx.request.body.password
+    let data = await register(username, password)
+    if (data.length != 0) {
+      response.stat = 1
+      response.data = data[0]
+    } else {
+      response.stat = 0
+      response.msg = '注册失败'
+    }
+    ctx.body = response
   })
 
   // 装载所有子路由
