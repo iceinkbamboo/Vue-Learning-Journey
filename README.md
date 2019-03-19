@@ -23,4 +23,22 @@ npm run e2e
 # run all tests
 npm test
 ```
+# koa
 
+```bash
+#安装koa
+npm install koa -S
+
+#安装数据库插件
+npm install mysql -s
+
+#安装koa-router中间件
+# koa2 对应的版本是 7.x
+npm install --save koa-router@7
+
+#安装koa2版本的koa-bodyparser@3中间件
+#对于POST请求的处理，koa-bodyparser中间件可以把koa2上下文的formData数据解析到ctx.request.body中
+npm install --save koa-bodyparser@3
+
+#安装koa2-cors,设置请求跨域
+npm install --save koa2-cors
