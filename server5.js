@@ -4,9 +4,8 @@ function server5() {
   const Router = require('koa-router')
   const bodyParser = require('koa-bodyparser')
   const {query} = require('./mySql')
-  var cors = require('koa2-cors')
+  const cors = require('koa2-cors')
   const app = new Koa()
-  app.use(cors())
   async function getUser() {
     let sql = 'select * from user'
     let data = await query(sql)
@@ -36,10 +35,11 @@ function server5() {
   router.use('/poetry', home.routes(), home.allowedMethods())
 
   // 加载路由中间件
+  app.use(cors())
   app.use(bodyParser())
   app.use(router.routes()).use(router.allowedMethods())
   app.listen(3000, () => {
-    console.log('[demo] route-use-middleware is starting at port 3000')
+    console.log('server is starting at port 3000')
   })
 }
 
