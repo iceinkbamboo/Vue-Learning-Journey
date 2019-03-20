@@ -32,7 +32,7 @@ export default {
           this.$message.warning('请输入用户名或密码')
           return false
         }
-        axios.post('http://localhost:3000/poetry/login', {
+        axios.post('http://localhost:5050/poetry/login', {
           username: that.username,
           password: that.password
         }).then(function (response) {
@@ -56,7 +56,7 @@ export default {
           this.$message.warning('两次输入的密码不同')
           return false
         }
-        axios.post('http://localhost:3000/poetry/register', {
+        axios.post('http://localhost:5050/poetry/register', {
           username: that.username,
           password: that.password
         }).then(function (response) {
@@ -75,7 +75,7 @@ export default {
     },
     getUser: function (username) {
       let that = this
-      axios.post('http://localhost:3000/poetry/getUser', {
+      axios.post('http://localhost:5050/poetry/getUser', {
         username: username
       }).then(function (response) {
         var data = response.data
