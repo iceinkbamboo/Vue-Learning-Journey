@@ -144,3 +144,31 @@ server()
 #}
 #使用下面命令开启
 npm run server
+
+```
+# Vue组件
+
+```bash
+#使用组件的三种方式
+1、<Header1 v-bind:title="title" @select="getEaxm"></Header1>
+2、<component v-bind:is="currentTabComponent"  v-bind:title="title" @select="getEaxm"></component>
+3、<div is="Header1"  v-bind:title="title" @select="getEaxm"></div>
+
+#父组件传值给子组件
+1、父组件使用子组件时，将数据绑定到一个特性
+v-bind:title="title1"
+
+2、子组件定义props【数组】，接收父组件传值
+props:['title']
+
+#父组件监听子组件事件
+1、父组件自定义事件select
+@select="getEaxm"
+
+2、子组件通过$emit(eventName,[...args])传递数据
+$emit('select',examid)
+
+3、父组件在getEaxm函数中接收参数
+getEaxm = (examid) => {
+  // todo
+}
