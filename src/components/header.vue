@@ -3,7 +3,9 @@
     <div class="form">
       <el-input v-model="examid"></el-input>
       <el-button class="form_btn" type="success" plain @click="getSelect">查询</el-button>
-      <div>{{title}}</div>
+    </div>
+    <div>
+      <el-button v-if="title" class="form_btn" type="success" plain @click="toExam">{{title}}</el-button>
     </div>
   </div>
 </template>
@@ -20,6 +22,9 @@ export default {
   methods: {
     getSelect () {
       this.$emit('select', this.examid)
+    },
+    toExam () {
+      this.$emit('exam', this.examid)
     }
   }
 }

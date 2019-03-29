@@ -182,7 +182,7 @@ getEaxm = (examid) => {
 #计算机属性computed
 
 ```bash
-# {{msg}}
+#通过{{msg}}在templete中使用
 computed: {
   msg () {
     return this.$store.state.msg
@@ -217,3 +217,120 @@ import store from './store/store'
 #在实例Vue中引入store
 #通过this.$store.state获取值
 #通过this.$store.commit('eventName', value)更改值
+```
+
+# Vue Router
+```bash
+
+#通过vue-cli创建项目时，自动创建，在src/router/index.js中
+
+#手动配置如下
+#安装vue-router
+npm install vue-router
+
+#import Vue from 'vue'
+#import Router from 'vue-router'
+#Vue.use(Router)
+export default new Router({
+  routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/index',
+      name: 'index',
+      component: index
+    }
+  ]
+})
+
+#在mian.js中引用，并加载到Vue实例中
+import router from './router'
+
+```
+
+#简单动态路由
+```bash
+
+#router/index.js定义路由
+routes: [
+  {
+    path: '/exam/:examid',
+    name: 'exam',
+    component: exam
+  }
+]
+
+#跳转方式
+this.$router.push({path: `/exam/${id}`})
+this.$router.push({name: 'exam', params:{examid: id}})
+
+#接收参数
+this.$route.params: {examid: id}
+
+#使用query传参
+#跳转页面连接格式：/exam?examid=id
+#路由配置
+routes: [
+  {
+    path: '/exam',
+    name: 'exam',
+    component: exam
+  }
+]
+#跳转方式
+this.$router.push({name: 'exam'}, query: {examid: id})
+#接收参数
+this.$route.query: {examid: id}
+
+```
+
+#嵌套路由
+```bash
+
+#结构
+routes: [
+  { path: '/user/:id', component: User,
+    children: [
+      {
+        // 当 /user/:id/profile 匹配成功，
+        // UserProfile 会被渲染在 User 的 <router-view> 中
+        path: 'profile',
+        component: UserProfile
+      },
+      {
+        // 当 /user/:id/posts 匹配成功
+        // UserPosts 会被渲染在 User 的 <router-view> 中
+        path: 'posts',
+        component: UserPosts
+      }
+    ]
+  }
+]
+
+```
+
+#命名视图
+```bash
+
+#通过路由<router-view />将多个组件渲染到同一个父组件中
+#html中
+<router-view class="view one"></router-view>
+<router-view class="view two" name="a"></router-view>
+<router-view class="view three" name="b"></router-view>
+
+#路由配置
+routes: [
+  {
+    path: '/',
+    components: {
+      default: Foo,
+      a: Bar,
+      b: Baz
+    }
+  }
+]
+
+```
