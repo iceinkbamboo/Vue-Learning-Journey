@@ -149,7 +149,10 @@ npm run server
 # Vue
 
 ```bash
+```
 # Vue组件
+
+```bash
 #使用组件的三种方式
 1、<Header1 v-bind:title="title" @select="getEaxm"></Header1>
 2、<component v-bind:is="currentTabComponent"  v-bind:title="title" @select="getEaxm"></component>
@@ -174,7 +177,11 @@ getEaxm = (examid) => {
   // todo
 }
 
+```
+
 # 计算机属性computed
+
+```bash
 # {{msg}}
 computed: {
   msg () {
