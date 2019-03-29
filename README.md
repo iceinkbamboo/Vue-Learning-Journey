@@ -146,9 +146,10 @@ server()
 npm run server
 
 ```
-# Vue组件
+# Vue
 
 ```bash
+# Vue组件
 #使用组件的三种方式
 1、<Header1 v-bind:title="title" @select="getEaxm"></Header1>
 2、<component v-bind:is="currentTabComponent"  v-bind:title="title" @select="getEaxm"></component>
@@ -172,3 +173,40 @@ $emit('select',examid)
 getEaxm = (examid) => {
   // todo
 }
+
+# 计算机属性computed
+# {{msg}}
+computed: {
+  msg () {
+    return this.$store.state.msg
+  }
+}
+```
+# Vuex
+```bash
+#安装vuex
+npm install vuex --save
+
+#创建store/store.js文件
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+export default new Vuex.Store({
+  state: {
+    msg: 'hello world'
+  },
+  mutations: {
+    changeMsg (state, value) {
+      console.log('获取值', value)
+      state.msg = value
+    }
+  }
+})
+
+#在main.js中引入store.js
+import store from './store/store'
+
+#在实例Vue中引入store
+#通过this.$store.state获取值
+#通过this.$store.commit('eventName', value)更改值
