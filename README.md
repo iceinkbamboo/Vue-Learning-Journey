@@ -150,7 +150,7 @@ npm run server
 
 ```bash
 ```
-# Vue组件
+#Vue组件
 
 ```bash
 #使用组件的三种方式
@@ -179,7 +179,7 @@ getEaxm = (examid) => {
 
 ```
 
-# 计算机属性computed
+#计算机属性computed
 
 ```bash
 # {{msg}}
