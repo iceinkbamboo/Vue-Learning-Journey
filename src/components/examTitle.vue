@@ -1,5 +1,6 @@
 <template>
   <div>
+    <global-component></global-component>
     <b>下面是默认插入位置</b>
     <slot v-bind:user="user"></slot>
     <div>

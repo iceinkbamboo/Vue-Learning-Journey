@@ -12,6 +12,16 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 
+// 定义全局组件
+Vue.component('global-component', {
+  data: function () {
+    return {
+      title: '我是全局组件'
+    }
+  },
+  template: '<div class="title">{{title}}</div>'
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

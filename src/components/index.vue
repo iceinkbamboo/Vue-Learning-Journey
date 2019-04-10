@@ -6,6 +6,7 @@
     <!-- <component v-bind:is="currentTabComponent"  v-bind:title="title" @select="getEaxm"></component> -->
     <!-- <div is="Header1"  v-bind:title="title" @select="getEaxm"></div> -->
     <div>{{name}}</div>
+    <global-component></global-component>
   </div>
 </template>
 
@@ -63,5 +64,8 @@ export default {
 .index{
   width: 100%;
   height: 100%;
+  .title{
+    color: pink;
+  }
 }
 </style>

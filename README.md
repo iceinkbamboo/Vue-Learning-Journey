@@ -158,6 +158,12 @@ npm run server
 2、<component v-bind:is="currentTabComponent"  v-bind:title="title" @select="getEaxm"></component>
 3、<div is="Header1"  v-bind:title="title" @select="getEaxm"></div>
 
+#动态组件上使用<keep-alive>,上面的方法2即为动态组件
+#保持组件，如果没有数据的改变，组件不会被重新渲染
+<keep-alive>
+  <component v-bind:is="currentTabComponent"></component>
+</keep-alive>
+
 #父组件传值给子组件
 1、父组件使用子组件时，将数据绑定到一个特性
 v-bind:title="title1"
@@ -208,7 +214,7 @@ computed: {
   <p>我是</P>
   <component-other></component-other>
 </Component>
-#组建中的内容会被插到<slot></slot>位置
+#调用组件中的内容会被插到<slot></slot>位置
 <div>
   <h1>下面是插入内容</h1>
   你好
@@ -303,6 +309,36 @@ computed: {
 
 #4、动态插槽
 <template v-slot:[slotName]></template>
+
+```
+#过滤器
+```bash
+
+#1、定义过滤器的两种方式（全局和局部）
+全局
+Vue.filter('capitalize', function(vallue) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
+局部
+filters: {
+  capitalize: function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
+  }
+}
+
+#2、使用方式
+1、{{ msg | capitalize }}
+2、<div v-bind:id="msg | capitalize"></div>
+
+#3、特殊使用
+1、串连，msg作为参数传入filterA,返回的值作为filterB的参数传入filterB
+{{ msg | filterA | filterB }}
+2、{{ msg | filterA('arg1', 'arg2') }}
+定义的filterA函数可接受3个参数，msg作为第一个参数传入，arg1是第二个参数，arg2是第三个参数
 
 ```
 
@@ -451,3 +487,4 @@ routes: [
 ]
 
 ```
+#SSR(服务端渲染)

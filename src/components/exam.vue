@@ -1,12 +1,14 @@
 <template>
   <div>
+    <div>
+      <p>这是题目{{examid}}</p>
+    </div>
     <exam-title>
       <template v-slot:default="slotProps">
-        <h1>{{examid}}</h1>
         {{slotProps.user.name}}
       </template>
       <template #footer="slotProps">
-        {{slotProps.user.name}}
+        {{slotProps.user.age}}
       </template>
       <template #[slotName]>{{'我是' + slotName}}</template>
     </exam-title>
