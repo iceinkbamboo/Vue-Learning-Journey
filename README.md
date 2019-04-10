@@ -177,6 +177,9 @@ getEaxm = (examid) => {
   // todo
 }
 
+#组件上使用v-model,子组件中需要如下配置
+<input v-bind:value="value" v-on:input="$emit('input', $event.target.value)" />
+
 ```
 
 #计算机属性computed
@@ -189,6 +192,120 @@ computed: {
   }
 }
 ```
+
+#插槽
+```bash
+
+#1、默认插槽
+#在子组件中添加<slot></slot>
+<div>
+  <h1>下面是插入内容</h1>
+  <slot></slot>
+</div>
+#使用组件时，在组件中添加其他元素，如string、html、其他组件
+<Component>
+  你好
+  <p>我是</P>
+  <component-other></component-other>
+</Component>
+#组建中的内容会被插到<slot></slot>位置
+<div>
+  <h1>下面是插入内容</h1>
+  你好
+  <p>我是</P>
+  <component-other></component-other>
+</div>
+
+#特殊：后备内容
+<div>
+  <slot>我是后备内容</slot>
+</div>
+1、使用组件时如果没有插槽内容时
+<Compoent></Component>
+会被渲染为
+<div>
+  我是后备内容
+</div>
+
+2、当有插槽内容时
+<Component>
+  我是插槽内容
+</Component>
+会被渲染为
+<div>
+  我是插槽内容
+</div>
+
+#2、具名插槽
+1、使用场景——组件内需要多个插槽，将插槽内容分放到不同位置
+<div>
+  <header>
+    <!-- 我们希望把页头放这里 -->
+  </header>
+  <main>
+    <!-- 我们希望把主要内容放这里 -->
+  </main>
+  <footer>
+    <!-- 我们希望把页脚放这里 -->
+  </footer>
+</div>
+
+2、<slot>中使用'name'属性定义额外的插槽,不使用'name'的插槽其实是'name="default"'
+<div>
+  <header>
+    <slot name="header"></slot>
+  </header>
+  <main>
+    <slot></slot>
+  </main>
+  <footer>
+    <slot name="footer"></slot>
+  </footer>
+</div>
+
+3、使用组件时，<template>元素中使用v-slot:指定插槽,'v-slot:'可以缩写为‘#’
+<base-layout>
+  <template v-slot:header>
+    <h1>Here might be a page title</h1>
+  </template>
+
+  <p>A paragraph for the main content.</p>
+  <p>And another one.</p>
+
+  <template v-slot:footer>
+    <p>Here some contact info</p>
+  </template>
+</base-layout>
+
+4、没有被包含在<template>中的插槽内容，会被放到默认插槽中，其实也会被包裹在<template>中
+<base-layout>
+  <template v-slot:header>
+    <h1>Here might be a page title</h1>
+  </template>
+
+  <template v-slot:default>
+    <p>A paragraph for the main content.</p>
+    <p>And another one.</p>
+  </template>
+
+  <template v-slot:footer>
+    <p>Here some contact info</p>
+  </template>
+</base-layout>
+
+#3、作用域插槽——子组件向父组件传递数据
+1、子组件
+<slot name="footer" v-bind:user="user"></slot>
+2、父组件中引用
+<template v-slot:footer="slotProps">
+  {{slotProps.user.name}}
+</template>
+
+#4、动态插槽
+<template v-slot:[slotName]></template>
+
+```
+
 # Vuex
 ```bash
 #安装vuex

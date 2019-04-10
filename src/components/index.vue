@@ -1,9 +1,11 @@
 <template>
   <div class="index">
     <!-- 使用组件的三种方式 -->
-    <Header1 v-bind:title="msg" @select="getEaxm" @exam="toExam"></Header1>
+    <!-- 组件中使用v-model -->
+    <Header1 v-model="name" v-bind:title="msg" @select="getEaxm" @exam="toExam"></Header1>
     <!-- <component v-bind:is="currentTabComponent"  v-bind:title="title" @select="getEaxm"></component> -->
-     <!-- <div is="Header1"  v-bind:title="title" @select="getEaxm"></div> -->
+    <!-- <div is="Header1"  v-bind:title="title" @select="getEaxm"></div> -->
+    <div>{{name}}</div>
   </div>
 </template>
 
@@ -18,7 +20,8 @@ export default {
   data () {
     return {
       title: '',
-      currentTabComponent: 'Header1'
+      currentTabComponent: 'Header1',
+      name: ''
     }
   },
   computed: {
