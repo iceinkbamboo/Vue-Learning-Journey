@@ -27,6 +27,8 @@ export default {
         sex: 'man'
       }
     }
+  },
+  methods: {
   }
 }
 </script>

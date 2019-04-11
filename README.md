@@ -402,6 +402,17 @@ export default new Router({
 #在mian.js中引用，并加载到Vue实例中
 import router from './router'
 
+#跳转页面，传递参数
+#如果路由不是动态路由，又需要传递参数
+1、this.$router.push({name: 'index', params:{examid: id}})
+#缺点：页面被强行刷新后，this.$route.params为空，需要提前存储
+#如果只是放到data数据中，页面刷新后仍然记录不了数据，需要存储到localStorage中
+
+2、this.$router.push({name: 'index', query: {examid: id}})
+#这种方法,路由链接后加?id=1
+#this.$route.query获取参数，即使刷新页面，也可获取参数
+
+
 ```
 
 #简单动态路由

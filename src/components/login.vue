@@ -39,7 +39,11 @@ export default {
           var data = response.data
           if (data.stat === 1) {
             console.log('登录成功')
-            that.$router.push({path: '/index'})
+            // params方式传参
+            // that.$router.push({name: 'index', params: {id: 1}})
+
+            // query方式传参
+            that.$router.push({name: 'index', query: {id: 1}})
           } else {
             that.$message.warning(data.msg)
           }

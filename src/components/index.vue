@@ -22,13 +22,25 @@ export default {
     return {
       title: '',
       currentTabComponent: 'Header1',
-      name: ''
+      name: '',
+      params: null
     }
   },
   computed: {
     msg () {
       return this.$store.state.msg
     }
+  },
+  created () {
+    console.log('动态获取参数', this.$route.params)
+    if (this.$route.params.id) {
+      this.params = this.$route.params
+      localStorage.setItem('params', this.$route.params.id)
+    }
+    console.log('存储data', this.params)
+    console.log('localStorage', localStorage.getItem('params'))
+
+    console.log('使用query传参', this.$route.query)
   },
   methods: {
     getEaxm (examid) {
