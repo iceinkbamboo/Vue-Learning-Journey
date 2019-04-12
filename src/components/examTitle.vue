@@ -13,12 +13,35 @@
         <slot name="header2"></slot>
       </div>
     </div>
+    <part-compoent v-bind:user="user"></part-compoent>
   </div>
 </template>
 
 <script>
-export default {
+export let partCompoent = {
+  template: `
+    <div>
+      <p>{{title}}</p>
+      <p @click="alertMsg">{{user.age}}</p>
+    </div>
+  `,
+  data () {
+    return {
+      title: '我来自局部组件'
+    }
+  },
+  props: ['user'],
+  methods: {
+    alertMsg () {
+      console.log('我是组件')
+    }
+  }
+}
+export default{
   name: 'examTitle',
+  components: {
+    partCompoent
+  },
   data () {
     return {
       user: {

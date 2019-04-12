@@ -13,20 +13,25 @@
       <template #[slotName]>{{'我是' + slotName}}</template>
     </exam-title>
     <el-button type="success" plain @click="changeSlot">改变插槽</el-button>
+    <part-compoent v-bind:user="user"></part-compoent>
   </div>
 </template>
 
 <script>
-import examTitle from './examTitle'
+import examTitle, { partCompoent } from './examTitle'
 export default {
   name: 'exam',
   components: {
+    partCompoent,
     examTitle
   },
   data () {
     return {
       examid: null,
-      slotName: 'header1'
+      slotName: 'header1',
+      user: {
+        age: '23'
+      }
     }
   },
   created () {

@@ -153,6 +153,32 @@ npm run server
 #Vue组件
 
 ```bash
+#全局组件和局部组件
+#全局组件
+Vue.component('global-component', {
+  data: function () {
+    return {
+      title: '我是全局组件'
+    }
+  },
+  template: '<div class="title">{{title}}</div>'
+})
+需要在Vue实例前声明
+全局所有实例都可以直接引用
+
+#局部组件
+1、单页面
+页面通过import引入，放到components中
+2、页面内定义，components引入
+let partCompoent = {
+  template: '<p>{{title}}</p>',
+  data () {
+    return {
+      title: '我来自局部组件'
+    }
+  }
+}
+
 #使用组件的三种方式
 1、<Header1 v-bind:title="title" @select="getEaxm"></Header1>
 2、<component v-bind:is="currentTabComponent"  v-bind:title="title" @select="getEaxm"></component>
@@ -499,3 +525,6 @@ routes: [
 
 ```
 #SSR(服务端渲染)
+```bash
+
+```
